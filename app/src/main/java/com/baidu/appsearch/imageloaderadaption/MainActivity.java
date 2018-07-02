@@ -24,6 +24,7 @@ public class MainActivity extends Activity {
     GlideImageView glideImageView2;
     GlideImageView glideImageView3;
     GlideImageView glideImageView4;
+    GlideImageView glideImageView5;
 
     String url1 = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1497688355699&di=ea69a930b82ce88561c635089995e124&imgtype=0&src=http%3A%2F%2Fcms-bucket.nosdn.127.net%2Ff84e566bcf654b3698363409fbd676ef20161119091503.jpg";
     String url2 = "http://img1.imgtn.bdimg.com/it/u=4027212837,1228313366&fm=23&gp=0.jpg";
@@ -57,14 +58,17 @@ public class MainActivity extends Activity {
         });
         glideImageView1 = findViewById(R.id.load_circle);
         RequestOptions requestOptionsCircle = new RequestOptions().optionalTransform(new CircleTransformation());
-        glideImageView1.load(url1, requestOptionsCircle);
+        glideImageView1.load(url2, requestOptionsCircle);
         glideImageView2 = findViewById(R.id.load_radius);
         RequestOptions requestOptionsRadius = new RequestOptions().optionalTransform(new RadiusTransformation(getApplicationContext(), 10));
-        glideImageView2.load(url1, requestOptionsRadius);
+        glideImageView2.load(url3, requestOptionsRadius);
         glideImageView3 = findViewById(R.id.load_radius_single);
         RequestOptions requestOptionsRadiusSingle = new RequestOptions().optionalTransform(new RadiusTransformation(getApplicationContext(), 10, RadiusTransformation.CornerType.RIGHT_TOP));
-        glideImageView3.load(url1, requestOptionsRadiusSingle);
+        glideImageView3.load(url3, requestOptionsRadiusSingle);
         glideImageView4 = findViewById(R.id.load_gif);
         glideImageView4.load(gif1);
+
+        glideImageView5 = findViewById(R.id.load_local);
+        glideImageView5.loadDrawable(R.mipmap.ic_launcher);
         }
 }

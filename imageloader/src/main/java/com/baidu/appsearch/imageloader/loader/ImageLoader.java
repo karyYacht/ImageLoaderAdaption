@@ -102,11 +102,23 @@ public class ImageLoader implements ILoader {
 
     @Override
     public void trimMemory(int level) {
-        GlideApp.get(mContext).onTrimMemory(level);
+        try {
+            if (Looper.myLooper() == Looper.getMainLooper()) { //只能在主线程执行
+                GlideApp.get(mContext).onTrimMemory(level);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void clearAllMemoryCaches() {
-        GlideApp.get(mContext).onLowMemory();
+        try {
+            if (Looper.myLooper() == Looper.getMainLooper()) { //只能在主线程执行
+                GlideApp.get(mContext).onLowMemory();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -1,9 +1,11 @@
-package com.baidu.appsearch.imageloader.progress;
+package com.baidu.appsearch.imageloader.loader;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.baidu.appsearch.imageloader.progress.ProgressManager;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.GlideBuilder;
 import com.bumptech.glide.Registry;
 import com.bumptech.glide.annotation.GlideModule;
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader;
@@ -16,7 +18,12 @@ import java.io.InputStream;
  * @author by sunfusheng on 2017/6/14.
  */
 @GlideModule
-public class ProgressAppGlideModule extends AppGlideModule {
+public class AppSearchGlideModule extends AppGlideModule {
+    @Override
+    public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
+        super.applyOptions(context, builder);
+    }
+
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
         super.registerComponents(context, glide, registry);

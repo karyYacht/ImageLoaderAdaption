@@ -12,8 +12,4 @@ import android.view.View;
 
 
 public interface ImageLoadingListener {
-
-    void onLoadingFailed(Exception e);
-
-    void onLoadingComplete();
 }

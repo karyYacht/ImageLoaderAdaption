@@ -7,8 +7,8 @@ import android.support.annotation.NonNull;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
+import com.baidu.appsearch.imageloader.config.ImageLoadingListener;
 import com.baidu.appsearch.imageloader.loader.GlideImageLoader;
-import com.baidu.appsearch.imageloader.progress.OnProgressListener;
 import com.baidu.appsearch.imageloader.transformation.CircleTransformation;
 import com.baidu.appsearch.imageloader.transformation.RadiusTransformation;
 import com.bumptech.glide.load.Transformation;
@@ -85,7 +85,7 @@ public class GlideImageView extends ImageView {
     }
 
     public GlideImageView dontAnimate() {
-        getImageLoader().getGlideRequest().dontTransform();
+        getImageLoader().getGlideRequest().dontAnimate();
         return this;
     }
 
@@ -110,20 +110,20 @@ public class GlideImageView extends ImageView {
         load(url, placeholder, radius, null);
     }
 
-    public void load(String url, @DrawableRes int placeholder, OnProgressListener onProgressListener) {
-        load(url, placeholder, null, onProgressListener);
+    public void load(String url, @DrawableRes int placeholder, ImageLoadingListener listener) {
+        load(url, placeholder, null, listener);
     }
 
-    public void load(String url, @DrawableRes int placeholder, int radius, OnProgressListener onProgressListener) {
-        load(url, placeholder, new RadiusTransformation(getContext(), radius), onProgressListener);
+    public void load(String url, @DrawableRes int placeholder, int radius, ImageLoadingListener listener) {
+        load(url, placeholder, new RadiusTransformation(getContext(), radius), listener);
     }
 
     public void load(Object obj, @DrawableRes int placeholder, Transformation<Bitmap> transformation) {
         getImageLoader().loadImage(obj, placeholder, transformation);
     }
 
-    public void load(Object obj, @DrawableRes int placeholder, Transformation<Bitmap> transformation, OnProgressListener onProgressListener) {
-        getImageLoader().listener(obj, onProgressListener).loadImage(obj, placeholder, transformation);
+    public void load(Object obj, @DrawableRes int placeholder, Transformation<Bitmap> transformation, ImageLoadingListener listener) {
+        getImageLoader().listener(obj, listener).loadImage(obj, placeholder, transformation);
     }
 
     public void loadCircle(String url) {
@@ -134,8 +134,8 @@ public class GlideImageView extends ImageView {
         loadCircle(url, placeholder, null);
     }
 
-    public void loadCircle(String url, @DrawableRes int placeholder, OnProgressListener onProgressListener) {
-        load(url, placeholder, new CircleTransformation(), onProgressListener);
+    public void loadCircle(String url, @DrawableRes int placeholder, ImageLoadingListener listener) {
+        load(url, placeholder, new CircleTransformation(), listener);
     }
 
     public void loadDrawable(@DrawableRes int resId) {

@@ -9,10 +9,12 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
+import com.baidu.appsearch.imageloader.config.ImageLoadingListener;
+import com.baidu.appsearch.imageloader.config.ListenerManager;
+import com.baidu.appsearch.imageloader.config.SimpleImageloadingListener;
 import com.baidu.appsearch.imageloader.progress.GlideApp;
 import com.baidu.appsearch.imageloader.progress.GlideRequest;
 import com.baidu.appsearch.imageloader.progress.OnProgressListener;
-import com.baidu.appsearch.imageloader.progress.ProgressManager;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.DrawableImageViewTarget;
@@ -105,11 +107,11 @@ public class GlideImageLoader {
         return this;
     }
 
-    public GlideImageLoader listener(Object obj, OnProgressListener onProgressListener) {
+    public GlideImageLoader listener(Object obj, ImageLoadingListener listener) {
         if (obj instanceof String) {
             url = (String) obj;
         }
-        ProgressManager.addListener(url, onProgressListener);
+        ListenerManager.addListener(url, listener);
         return this;
     }
 
@@ -125,21 +127,29 @@ public class GlideImageLoader {
 
         @Override
         public void onLoadFailed(@Nullable Drawable errorDrawable) {
-//            OnProgressListener onProgressListener = ProgressManager.getProgressListener(getUrl());
-//            if (onProgressListener != null) {
-//                onProgressListener.onProgress(true, 100, 0, 0);
-//                ProgressManager.removeListener(getUrl());
-//            }
+            ImageLoadingListener imageLoadingListener = ListenerManager.getProgressListener(getUrl());
+            if (imageLoadingListener instanceof OnProgressListener) {
+                OnProgressListener onProgressListener = (OnProgressListener) imageLoadingListener;
+                onProgressListener.onProgress(true, 100, 0, 0);
+            } else if (imageLoadingListener instanceof SimpleImageloadingListener){
+                SimpleImageloadingListener simpleImageloadListener = (SimpleImageloadingListener) imageLoadingListener;
+                simpleImageloadListener.onLoadingFailed();
+            }
+            ListenerManager.removeListener(getUrl());
             super.onLoadFailed(errorDrawable);
         }
 
         @Override
         public void onResourceReady(@NonNull Drawable resource, @Nullable Transition<? super Drawable> transition) {
-//            OnProgressListener onProgressListener = ProgressManager.getProgressListener(getUrl());
-//            if (onProgressListener != null) {
-//                onProgressListener.onProgress(true, 100, 0, 0);
-//                ProgressManager.removeListener(getUrl());
-//            }
+            ImageLoadingListener imageLoadingListener = ListenerManager.getProgressListener(getUrl());
+            if (imageLoadingListener instanceof OnProgressListener) {
+                OnProgressListener onProgressListener = (OnProgressListener) imageLoadingListener;
+                onProgressListener.onProgress(true, 100, 0, 0);
+            } else if (imageLoadingListener instanceof SimpleImageloadingListener){
+                SimpleImageloadingListener simpleImageloadListener = (SimpleImageloadingListener) imageLoadingListener;
+                simpleImageloadListener.onLoadingSuccess();
+            }
+            ListenerManager.removeListener(getUrl());
             super.onResourceReady(resource, transition);
         }
     }

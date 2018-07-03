@@ -2,9 +2,12 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ImageloaderAdaption.iml" filepath="$PROJECT_DIR$/ImageloaderAdaption.iml" />
+      <module fileurl="file://$PROJECT_DIR$/ImageLoaderAdaption.iml" filepath="$PROJECT_DIR$/ImageLoaderAdaption.iml" />
+      <module fileurl="file://D:\Android\codes\ImageLoaderAdaption\ImageloaderAdaption.iml" filepath="D:\Android\codes\ImageLoaderAdaption\ImageloaderAdaption.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://D:\Android\codes\ImageLoaderAdaption\app\app.iml" filepath="D:\Android\codes\ImageLoaderAdaption\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/imageloader/imageloader.iml" filepath="$PROJECT_DIR$/imageloader/imageloader.iml" />
+      <module fileurl="file://D:\Android\codes\ImageLoaderAdaption\imageloader\imageloader.iml" filepath="D:\Android\codes\ImageLoaderAdaption\imageloader\imageloader.iml" />
     </modules>
   </component>
 </project>
